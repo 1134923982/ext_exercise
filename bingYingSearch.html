@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bing Ying</title>
+    <link rel="stylesheet" type="text/css" href="./ext/resources/css/ext-all.css"/>
+    <!-- LIBS -->
+    <script type="text/javascript" src="./ext/adapter/ext/ext-base.js"></script>
+    <!-- ENDLIBS -->
+    <script type="text/javascript" src="./ext/ext-all.js"></script>
+    <script type="text/javascript" src="./components/icon_img.js"></script>
+    <script type="text/javascript" src="./components/icon_search.js"></script>
+    <script type="text/javascript" src="./components/input_field.js"></script>
+    <style>
+        .test {
+            position: absolute;
+            margin: 20px;
+        }
+
+        .img {
+            position: absolute;
+        }
+
+        .button {
+            color: red;
+        }
+
+        .lay {
+            align-content: center;
+            margin-top: 100px;
+            margin-left: 100px;
+        }
+
+        body {
+            background: url('./img/th.jpg') no-repeat;
+        }
+    </style>
+    <script>
+
+        Ext.onReady(function () {
+            var container = new Ext.Container({
+                renderTo: 'test',
+                layout: 'table',
+                pageX: 100,
+                pageY: 200,
+                cls: 'lay',
+                layoutConfig: {
+                    columns: 2
+                },
+                items: [{
+                    colspan: 1,
+                    width: 200,
+                    height: 100,
+                    layout: 'hbox',
+                    layoutConfig: {pack: 'center'},
+                    xtype: 'container',
+                    items: [
+                        {xtype:'first.img'}
+                    ]
+                }, {
+                    xtype: 'tabpanel',
+                    colspan: 1,
+                    width: 700,
+                    height: 70,
+
+                    activeTab: 0,
+
+                    items: [{
+                        title: '国内版',
+                        xtype: 'container',
+                        layout: {
+                            type: 'hbox',
+                            pack: 'left'
+                        },
+                        colspan: 5,
+                        defaultType: 'container',
+                        width: 700,
+                        height: 50,
+                        items: [
+                            {xtype: 'field', width: 650, height: 50},
+                            {
+                                xtype: 'first.search',
+                            }
+                        ]
+
+                    }, {
+                        title: '国外版',
+                        xtype: 'container',
+                        layout: {
+                            type: 'hbox',
+                            pack: 'left'
+                        },
+                        colspan: 5,
+                        defaultType: 'container',
+                        width: 700,
+                        height: 50,
+                        items: [
+                            {xtype: 'field', width: 650, height: 50},
+                            {
+                                xtype: 'first.search'
+                            }
+                        ]
+                    }]
+                }]
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div id="test">
+</div>
+</body>
+</html>
