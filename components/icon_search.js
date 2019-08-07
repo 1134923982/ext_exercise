@@ -5,8 +5,9 @@ first.search = Ext.extend(Ext.Button, {
     icon: './img/search.png',
     scale: 'large',
     cls: 'search-icon',
-    width: 30,
-    height: 30
+    cls: 'panel',
+    width: 45,
+    height: 45
 });
 
 Ext.reg('first.search', first.search)
