@@ -1,6 +1,6 @@
 // Ext.ns('first')
 //
-// first.field = Ext.extend(Ext.BoxComponent, {
+// first.field = Ext.extend(Ext.Field, {
 //     title: '国外版',
 //     xtype: 'container',
 //     layout: {
