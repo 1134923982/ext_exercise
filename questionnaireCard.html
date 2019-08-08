@@ -88,7 +88,7 @@
                                 boxLabel: '干垃圾',
                                 name: 'tomato',
                                 inputValue: 'A',
-                                checked: false
+                                checked: true
                             },{
                                 boxLabel: '湿垃圾',
                                 name: 'tomato',
@@ -208,6 +208,15 @@
                                 text: 'submit',
                                 listeners:{
                                     'click': function (btm, e) {
+                                        for(var i =0; i<Ext.getCmp('a2').items.length; i++){
+                                            if(Ext.getCmp('a2').items.get(i).isVisible()){
+                                                break;
+                                            }
+                                            if(i === Ext.getCmp('a2').items.length-1){
+                                                Ext.MessageBox.alert('请完成所有题目!!!')
+                                                return
+                                            }
+                                        }
                                         Ext.MessageBox.alert('恭喜你，你是一个分类垃圾的环保卫士！')
                                     }
                                 }
