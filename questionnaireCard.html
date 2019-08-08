@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <link rel="stylesheet" type="text/css" href="./ext/resources/css/ext-all.css"/>
+    <!-- LIBS -->
+    <script type="text/javascript" src="./ext/adapter/ext/ext-base.js"></script>
+    <!-- ENDLIBS -->
+    <script type="text/javascript" src="./ext/ext-all.js"></script>
+    <style>
+
+    </style>
+    <script type="text/javascript">
+        Ext.onReady(function () {
+
+            var navHandler = function (direction) {
+
+                var wizard = Ext.getCmp('wizard').layout;
+                var prev = Ext.getCmp('move-prev');
+                var next = Ext.getCmp('move-next');
+                var activeId = wizard.activeItem.id;
+
+                if (activeId == 'card-0') {
+                    if (direction == 1) {
+                        wizard.setActiveItem(1);
+                        prev.setDisabled(false);
+                    }
+                } else if (activeId == 'card-1') {
+                    if (direction == -1) {
+                        wizard.setActiveItem(0);
+                        prev.setDisabled(true);
+                    } else {
+                        wizard.setActiveItem(2);
+                        next.setDisabled(true);
+                        Ext.getCmp('a1').items.get(0).setVisible(Ext.getCmp('card-0').items.get(0).checked);
+                        Ext.getCmp('a1').items.get(0).setValue(Ext.getCmp('card-0').items.get(0).checked);
+                        Ext.getCmp('a1').items.get(1).setVisible(Ext.getCmp('card-0').items.get(1).checked);
+                        Ext.getCmp('a1').items.get(1).setValue(Ext.getCmp('card-0').items.get(1).checked);
+                        Ext.getCmp('a1').items.get(2).setVisible(Ext.getCmp('card-0').items.get(2).checked);
+                        Ext.getCmp('a1').items.get(2).setValue(Ext.getCmp('card-0').items.get(2).checked);
+                        Ext.getCmp('a1').items.get(3).setVisible(Ext.getCmp('card-0').items.get(3).checked);
+                        Ext.getCmp('a1').items.get(3).setValue(Ext.getCmp('card-0').items.get(3).checked);
+                        Ext.getCmp('a2').items.get(0).setVisible(Ext.getCmp('card-1').items.get(0).checked);
+                        Ext.getCmp('a2').items.get(1).setVisible(Ext.getCmp('card-1').items.get(1).checked);
+                        Ext.getCmp('a2').items.get(2).setVisible(Ext.getCmp('card-1').items.get(2).checked);
+                        Ext.getCmp('a2').items.get(3).setVisible(Ext.getCmp('card-1').items.get(3).checked);
+                    }
+                } else if (activeId == 'card-2') {
+                    if (direction == -1) {
+                        wizard.setActiveItem(1);
+                        next.setDisabled(false);
+                    }
+                }
+            };
+
+            var viewPort = new Ext.Viewport({
+                layout: 'fit',
+                height: 400,
+                width: 400,
+                items: [{
+                    id: 'wizard',
+                    title: '调查问卷',
+                    layout: 'card',
+                    activeItem: 0,
+                    bodyStyle: 'padding:15px',
+                    defaults: {
+                        border: false
+                    },
+                    bbar: [{
+                        id: 'move-prev',
+                        text: '上一步',
+                        handler: navHandler.createDelegate(this, [-1]),
+                        disabled: true
+                    }, '->', {
+                        id: 'move-next',
+                        text: '下一步',
+                        handler: navHandler.createDelegate(this, [1])
+                    }],
+                    items: [{
+                        id: 'card-0',
+                        xtype: 'fieldset',
+                        layout: 'vbox',
+                        title: '<h2>Q1:番茄酱属于以下哪种垃圾？（单选）</h2>',
+                        defaultType: 'radio',
+                        items: [
+                            {
+                                boxLabel: '干垃圾',
+                                name: 'tomato',
+                                inputValue: 'A',
+                                checked: false
+                            },{
+                                boxLabel: '湿垃圾',
+                                name: 'tomato',
+                                inputValue: 'B',
+                                checked: false
+                            },{
+                                boxLabel: '有害垃圾',
+                                name: 'tomato',
+                                inputValue: 'C',
+                                checked: false
+                            },{
+                                boxLabel: '可回收物',
+                                name: 'tomato',
+                                inputValue: 'D',
+                                checked: false
+                            }
+                        ],
+                        listeners: {
+                            'click': function () {
+                                Ext.getCmp('a2').items.add({
+                                    boxLabel: '可回收物',
+                                    name: 'tomato',
+                                    inputValue: 'D',
+                                    disabled: true
+                                })
+                            }
+                        }
+                    }, {
+                        id: 'card-1',
+                        xtype: 'fieldset',
+                        layout: 'vbox',
+                        title: '<h2>Q2:王大叔出门遛狗后，哪些是正确处理狗粑粑的方法？（多选）</h2>',
+                        defaultType: 'checkbox',
+                        items: [
+                            {
+                                boxLabel: '把粑粑用废报纸包好带回家冲掉',
+                                inputValue: 'A',
+                                checked: false
+                            },{
+                                boxLabel: '受污染的报纸按有害垃圾处理',
+                                inputValue: 'B',
+                                checked: false
+                            },{
+                                boxLabel: '没受污染的报纸按可回收垃圾处理',
+                                inputValue: 'C',
+                                checked: false
+                            },{
+                                boxLabel: '受污染的报纸浸水后当湿垃圾处理',
+                                inputValue: 'D',
+                                checked: false
+                            }
+                        ]
+                    }, {
+                        id: 'card-2',
+                        xtype: 'form',
+                        items: [
+                            {
+                                id: 'a1',
+                                xtype: 'fieldset',
+                                layout: 'form',
+                                title: '<h2>Q1:番茄酱属于以下哪种垃圾？（单选）</h2>',
+                                defaultType: 'radio',
+                                items: [{
+                                    boxLabel: '干垃圾',
+                                    name: 'tomato',
+                                    inputValue: 'A',
+                                    disabled: true
+                                },{
+                                    boxLabel: '湿垃圾',
+                                    name: 'tomato',
+                                    inputValue: 'B',
+                                    disabled: true
+                                },{
+                                    boxLabel: '有害垃圾',
+                                    name: 'tomato',
+                                    inputValue: 'C',
+                                    disabled: true
+                                },{
+                                    boxLabel: '可回收物',
+                                    name: 'tomato',
+                                    inputValue: 'D',
+                                    disabled: true
+                                }]
+                            },
+                            {
+                                id: 'a2',
+                                xtype: 'fieldset',
+                                layout: 'form',
+                                title: '<h2>Q2:王大叔出门遛狗后，哪些是正确处理狗粑粑的方法？（多选）</h2>',
+                                defaultType: 'checkbox',
+                                items: [{
+                                    boxLabel: '把粑粑用废报纸包好带回家冲掉',
+                                    inputValue: 'A',
+                                    checked: true,
+                                    disabled: true
+                                },{
+                                    boxLabel: '受污染的报纸按有害垃圾处理',
+                                    inputValue: 'B',
+                                    checked: true,
+                                    disabled: true
+                                },{
+                                    boxLabel: '没受污染的报纸按可回收垃圾处理',
+                                    inputValue: 'C',
+                                    checked: true,
+                                    disabled: true
+                                },{
+                                    boxLabel: '受污染的报纸浸水后当湿垃圾处理',
+                                    inputValue: 'D',
+                                    disabled: true,
+                                    checked: true,
+                                    hideMode: 'offsets'
+                                }]
+                            }
+                        ],
+                        buttons: [
+                            {
+                                text: 'submit',
+                                listeners:{
+                                    'click': function (btm, e) {
+                                        Ext.MessageBox.alert('恭喜你，你是一个分类垃圾的环保卫士！')
+                                    }
+                                }
+                            }
+                        ]
+                    }]
+                }]
+            })
+
+        });
+    </script>
+</head>
+<body>
+<div id="test">
+
+</div>
+</body>
+</html>
